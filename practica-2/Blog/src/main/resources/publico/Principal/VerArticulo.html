@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Leer Artículo</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+</head>
+<body>
+<!-- Responsive navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#!">Viajero Curioso</a>
+    </div>
+</nav>
+<!-- Page content-->
+<div class="container">
+    <div class="row">
+        <!-- Article content-->
+        <div class="col-lg-8">
+            <h1 class="mt-4" id="titulo"></h1>
+            <div class="small text-muted" id="fecha"></div>
+            <div class="small text-muted" id="autor"></div>
+            <p id="cuerpo"></p>
+        </div>
+        <!-- Categories sidebar -->
+        <div class="col-lg-4">
+            <h4 class="mt-4">Etiquetas</h4>
+            <div class="list-group">
+                <button type="button" class="list-group-item list-group-item-action">Web Design</button>
+                <button type="button" class="list-group-item list-group-item-action">HTML</button>
+                <button type="button" class="list-group-item list-group-item-action">Freebies</button>
+                <button type="button" class="list-group-item list-group-item-action">JavaScript</button>
+                <button type="button" class="list-group-item list-group-item-action">CSS</button>
+                <button type="button" class="list-group-item list-group-item-action">Tutorials</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Bootstrap core JS-->
+<script src="js/bootstrap.bundle.min.js"></script>
+<script>
+        const b = async () => {
+    try {
+        const response = await fetch('/verArticulos');
+        const data = await response.json();
+        imprimirArticulos(data); // Llamar al método para imprimir los artículos
+    } catch (error) {
+        console.log(error);
+    }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('id');
+
+        const mostrarArticulo = async() => {
+            const articulo = await getArticuloById(id);
+
+            titulo.innerText = `${articulo.titulo} - ${article.feche}`
+            cuerpo.innerText = article.cuerpo;
+            autor.innerText = article.autor.username;
+        }
+        export const getArticulobyId = async  ( id ) => {
+            try {
+                const response = await fetch(`/articulo/${id}`);
+                const data = await response.json();
+                return data;
+            } catch (e){
+                consola.log(e)
+                return null;
+            }
+        }
+
+
+};
+    console.log(b());
+</script>
+</body>
+</html>

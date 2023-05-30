@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <title>Agregar Artículo</title>
+  <!-- Favicon-->
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <!-- Core theme CSS (includes Bootstrap)-->
+  <link href="css/styles.css" rel="stylesheet" />
+</head>
+<body>
+<!-- Responsive navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" href="#!">Viajero Curioso</a>
+  </div>
+</nav>
+<!-- Page content-->
+<div class="container">
+  <div class="row">
+    <!-- Article form-->
+    <div class="col-lg-8">
+      <h1 class="mt-4">Agregar Artículo</h1>
+      <form method="post"action="/agregarArticulo">
+        <div class="mb-3">
+          <label for="titulo" class="form-label">Titulo del Artículo</label>
+          <input type="text" class="form-control" id="titulo" name="titulo">
+        </div>
+        <div class="mb-3">
+          <label for="cuerpo" class="form-label">Contenido del Artículo</label>
+          <textarea class="form-control" id="cuerpo" name="cuerpo" rows="17"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </form>
+    </div>
+    <!-- Categories sidebar -->
+    <div class="col-lg-4">
+      <h4 class="mt-4">Etiquetas</h4>
+      <div class="list-group">
+        <button type="button" class="list-group-item list-group-item-action">Web Design</button>
+        <button type="button" class="list-group-item list-group-item-action">HTML</button>
+        <button type="button" class="list-group-item list-group-item-action">Freebies</button>
+        <button type="button" class="list-group-item list-group-item-action">JavaScript</button>
+        <button type="button" class="list-group-item list-group-item-action">CSS</button>
+        <button type="button" class="list-group-item list-group-item-action">Tutorials</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Bootstrap core JS-->
+<script src="js/bootstrap.bundle.min.js"></script>
+<script>
+  const btnRegistrarse = document.querySelector('.btnRegistrarse');
+  btnRegistrarse.addEventListener('click', () => {
+    window.location.href = '/Login/Registrarse.html';
+  });
+</script>
+</body>
+</html>
