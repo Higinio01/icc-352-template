@@ -37,13 +37,9 @@ public class Main {
                 if(user!=null) {
                     ctx.sessionAttribute("idUsuario", user.getUsername());
                     ctx.redirect("/Principal/principalLogin.html");
-                }else{
-                    ctx.result("Hola mundo cualquier mierda");
-                }
             });
 
             app.post("/registrarse",ctx -> {
-                ctx.result("Hola mundo cualquier mierda");
                 UsuarioControlador.crearUsuario(ctx);
                 ctx.redirect("/Login/Login.html");
                 //BD.getInstance().
