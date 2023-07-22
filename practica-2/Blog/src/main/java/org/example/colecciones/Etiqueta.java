@@ -1,8 +1,12 @@
 package org.example.colecciones;
 
+
 public class Etiqueta {
     long id;
     String etiqueta;
+
+    public Etiqueta() {
+    }
 
     public Etiqueta(long id, String etiqueta) {
         this.id = id;

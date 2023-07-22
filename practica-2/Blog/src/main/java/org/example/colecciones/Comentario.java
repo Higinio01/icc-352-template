@@ -1,13 +1,15 @@
 package org.example.colecciones;
 
-import java.util.Date;
-import java.util.List;
+import java.util.Collection;
 
 public class Comentario {
     long id;
     String comentario;
     Usuario autor;
     Articulo articulo;
+
+    public Comentario() {
+    }
 
     public Comentario(long id, String comentario, Usuario autor, Articulo articulo) {
         this.id = id;
@@ -16,20 +18,16 @@ public class Comentario {
         this.articulo = articulo;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public String getComentario() {
         return comentario;
     }
 
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
+    public Articulo getArticulo() {
+        return articulo;
+    }
+
+    public void setArticulo(Articulo articulo) {
+        this.articulo = articulo;
     }
 
     public Usuario getAutor() {
@@ -40,11 +38,18 @@ public class Comentario {
         this.autor = autor;
     }
 
-    public Articulo getArticulo() {
-        return articulo;
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
     }
 
-    public void setArticulo(Articulo articulo) {
-        this.articulo = articulo;
+    public long getId() {
+        return id;
     }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+
 }
+

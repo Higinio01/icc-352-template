@@ -1,34 +1,46 @@
 package org.example.colecciones;
 
-public class Usuario {
-    String username;
-    String Nombre;
-    String password;
-    boolean administrador;
-    boolean autor;
 
-    public Usuario(String username, String nombre, String password, boolean administrador, boolean autor) {
-        this.username = username;
-        Nombre = nombre;
-        this.password = password;
-        this.administrador = administrador;
-        this.autor = autor;
+public class Usuario {
+    private String username;
+    private String nombre;
+    private String password;
+    private boolean admin;
+    private boolean autor;
+
+
+    public Usuario() {
     }
 
+    public Usuario(String username, String nombre, String password, boolean admin, boolean autor) {
+        this.username = username;
+        this.nombre = nombre;
+        this.password = password;
+        this.admin = admin;
+        this.autor = autor;
+
+    }
+    public String getUsuario() {
+        return  username;
+    }
+    public void setUsuario(String usuario) {
+        this.username = usuario;
+
+    }
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsername(String usuario) {
+        this.username = usuario;
     }
 
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
     public void setNombre(String nombre) {
-        Nombre = nombre;
+        this.nombre = nombre;
     }
 
     public String getPassword() {
@@ -39,14 +51,6 @@ public class Usuario {
         this.password = password;
     }
 
-    public boolean isAdministrador() {
-        return administrador;
-    }
-
-    public void setAdministrador(boolean administrador) {
-        this.administrador = administrador;
-    }
-
     public boolean isAutor() {
         return autor;
     }
@@ -54,4 +58,23 @@ public class Usuario {
     public void setAutor(boolean autor) {
         this.autor = autor;
     }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
+
+
+    public void actualizar(Usuario tmp) {
+        username = tmp.getUsername();
+        nombre = tmp.getNombre();
+        password = tmp.getPassword();
+    }
+
+
 }
+
+

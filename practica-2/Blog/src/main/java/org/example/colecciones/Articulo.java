@@ -1,16 +1,41 @@
 package org.example.colecciones;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 public class Articulo {
  long id;
  String titulo;
  String cuerpo;
  Usuario autor;
- Date fecha;
- List<Comentario> ListaComentario;
- List<Etiqueta> ListaEtiqueta;
+ LocalDate fecha;
+ List<Comentario> listaComentarios;
+ List<String> listaEtiquetas;
+
+ public Articulo(){
+ }
+
+ public Articulo(long id, String titulo, String cuerpo, Usuario autor, LocalDate fecha, List<Comentario> listaComentarios, List<String> listaEtiquetas ){
+  this.id = id;
+  this.autor = autor;
+  this.cuerpo = cuerpo;
+  this.fecha = fecha;
+  this.titulo = titulo;
+  this.listaComentarios = listaComentarios;
+  this.listaEtiquetas = listaEtiquetas;
+ }
+
+ public Articulo(long id, String titulo, String cuerpo, Usuario autor, LocalDate fecha){
+  this.id = id;
+  this.autor = autor;
+  this.cuerpo = cuerpo;
+  this.fecha = fecha;
+  this.titulo = titulo;
+  this.listaComentarios = new ArrayList<>();
+ }
 
  public long getId() {
   return id;
@@ -20,12 +45,35 @@ public class Articulo {
   this.id = id;
  }
 
- public String getTitulo() {
-  return titulo;
+ public List<Comentario> getListaComentarios() {
+  return listaComentarios;
  }
 
- public void setTitulo(String titulo) {
-  this.titulo = titulo;
+ public List<String> getListaEtiquetas() {
+  return listaEtiquetas;
+ }
+
+ public void setListaEtiqueta(List<String> listaEtiqueta) {
+  listaEtiquetas = listaEtiqueta;
+ }
+ public void setListaComentarios(List<Comentario> listaComentarios) {
+  this.listaComentarios = listaComentarios;
+ }
+
+ public LocalDate getFecha() {
+  return fecha;
+ }
+
+ public void setFecha(LocalDate fecha) {
+  this.fecha = fecha;
+ }
+
+ public Usuario getAutor() {
+  return autor;
+ }
+
+ public void setAutor(Usuario autor) {
+  this.autor = autor;
  }
 
  public String getCuerpo() {
@@ -36,55 +84,19 @@ public class Articulo {
   this.cuerpo = cuerpo;
  }
 
-
- public Usuario getAutor() {
-  return autor;
+ public String getTitulo() {
+  return titulo;
  }
 
- public void setAutor(Usuario autor) {
-  this.autor = autor;
- }
-
- public Date getFecha() {
-  return fecha;
- }
-
- public void setFecha(Date fecha) {
-  this.fecha = fecha;
- }
-
- public List<Comentario> getListaComentario() {
-  return ListaComentario;
- }
-
- public void setListaComentario(List<Comentario> listaComentario) {
-  ListaComentario = listaComentario;
- }
-
- public List<Etiqueta> getListaEtiqueta() {
-  return ListaEtiqueta;
- }
-
- public void setListaEtiqueta(List<Etiqueta> listaEtiqueta) {
-  ListaEtiqueta = listaEtiqueta;
- }
-
- public Articulo(long id, String titulo, String cuerpo, Usuario autor, Date fecha, List<Comentario> listaComentario, List<Etiqueta> listaEtiqueta) {
-  this.id = id;
+ public void setTitulo(String titulo) {
   this.titulo = titulo;
-  this.cuerpo = cuerpo;
-  this.autor = autor;
-  this.fecha = fecha;
-  ListaComentario = listaComentario;
-  ListaEtiqueta = listaEtiqueta;
  }
 
- public Articulo(long id, String titulo, String cuerpo, Usuario autor, Date fecha) {
-  this.id = id;
-  this.titulo = titulo;
-  this.cuerpo = cuerpo;
-  this.autor = autor;
-  this.fecha = fecha;
+ public void actualizar(Articulo tmp) {
+  cuerpo = tmp.getCuerpo();
+  fecha = tmp.getFecha();
+  titulo = tmp.getTitulo();
+  listaEtiquetas = tmp.getListaEtiquetas();
+
  }
 }
-

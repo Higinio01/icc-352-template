@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Viajero Curioso</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic&amp;display=swap">
+    <link rel="stylesheet" href="fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="css/custom-style.css">
+    <title th:text="${titulo}">Listar</title>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="/listar">Viajero Curioso</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/usuario">Usuario</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/listar">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/crearArticulo">Nuevo Artículo</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login" th:text="${accion}"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<header class="masthead" style="background-image: url('img/header-bg.jpg');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h1>Bienvenido al Viajero Curioso</h1>
+                    <span class="subheading">Abre la puerta hacia nuevas perspectivas: El blog que desafia tus limites</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <h2 class="section-heading">Ultimos articulos</h2>
+            <hr class="divider">
+        </div>
+    </div>
+    <div class="row" th:each="articulo : ${lista}">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="post-preview">
+                <a th:href="'/verArticulo/'+${articulo.id}">
+                    <h2 class="post-title" th:text="${articulo.titulo}"></h2>
+                </a>
+                <p class="post-content" th:text="${articulo.cuerpo}">
+                </p>
+                <p class="post-meta">
+                    Publicado por <a href="#" th:text="${articulo.autor.nombre}">Start Bootstrap</a>
+                    el <a th:text="${articulo.fecha}">September 24, 2018</a>
+                </p>
+                <p class="post-etiquetas">
+                        <span th:each="tag, tagStat : ${articulo.listaEtiquetas}">
+                            <span th:text="${tag}"></span>
+                            <span th:if="${!tagStat.last}">, </span>
+                        </span>
+                </p>
+            </div>
+            <hr>
+        </div>
+    </div>
+</div>
+
+<footer class="bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <ul class="list-inline text-center">
+                    <li class="list-inline-item">
+                        <a href="#" class="text-dark">
+                            <i class="fa fa-twitter fa-lg"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#" class="text-dark">
+                            <i class="fa fa-facebook fa-lg"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#" class="text-dark">
+                            <i class="fa fa-github fa-lg"></i>
+                        </a>
+                    </li>
+                </ul>
+                <p class="text-muted text-center">&copy; Brand 2023</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/clean-blog.js"></script>
+</body>
+
+</html>
