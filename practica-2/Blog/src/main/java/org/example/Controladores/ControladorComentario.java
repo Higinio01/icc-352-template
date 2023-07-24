@@ -42,7 +42,7 @@ public class ControladorComentario extends BaseControlador {
             Comentario nuevoComentario = new Comentario(nuevoId,comentario, autor, articulo);
             servicioComentario.crearComentario(nuevoComentario);
 
-            articulo.getListaComentarios().add(nuevoComentario); // Agregar el nuevo comentario a la lista de comentarios del artículo
+            articulo.getListaComentarios().add(nuevoComentario);
 
             servicio_art.actualizarArticulo(articulo);
 

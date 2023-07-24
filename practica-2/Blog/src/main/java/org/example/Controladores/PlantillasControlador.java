@@ -13,9 +13,6 @@ public class PlantillasControlador extends BaseControlador {
         registrandoPlantillas();
     }
 
-    /**
-     * Registrando los sistemas de plantillas utilizados.
-     */
     private void registrandoPlantillas(){
         JavalinRenderer.register(new JavalinThymeleaf(), ".html");
     }

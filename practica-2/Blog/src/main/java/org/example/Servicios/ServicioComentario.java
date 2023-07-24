@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class ServicioComentario {
 
     private static ServicioComentario instancia;
-    private static ServicioArticulo servicio_articulo = ServicioArticulo.getInstancia();
+    //private static ServicioArticulo servicio_articulo = ServicioArticulo.getInstancia();
     private List<Comentario> listaComentarios = new ArrayList<>();
 
     private ServicioComentario(){}
@@ -22,15 +22,6 @@ public class ServicioComentario {
         return instancia;
     }
 
-    public List<Comentario> getListaComentarios() {
-        return listaComentarios;
-    }
-
-    public void setListaComentarios(List<Comentario> listaComentarios) {
-        this.listaComentarios = listaComentarios;
-    }
-
-    //CREAR
     public Comentario crearComentario(Comentario comen) {
         Comentario tmp = getComentarioPorID(comen.getId());
         if(tmp!=null) {
@@ -44,7 +35,6 @@ public class ServicioComentario {
         return comen;
     }
 
-    //listar
     private Comentario getComentarioPorID(long id) {
         return listaComentarios.stream().filter(u -> u.getId() == id).findFirst().orElse(null);
     }
@@ -55,7 +45,6 @@ public class ServicioComentario {
                 .collect(Collectors.toList());
     }
 
-    //borrar
     public boolean borrarComentario(long id) {
         Comentario tmp = getComentarioPorID(id);
         if(tmp==null) {

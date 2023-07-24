@@ -96,16 +96,12 @@ public class ControladorUsuario  extends BaseControlador {
                         String Lname = ctx.formParam("Lname");
                         String nombre = Fname+ ' ' + Lname;
 
-
-                        // Actualizar las propiedades del usuario
                         usuario.setUsername(username);
                         usuario.setPassword(password);
                         usuario.setNombre(nombre);
 
-                        // Llamar al método de servicio para editar el artículo
                         servicio_usuario.actualizarUsuario(usuario);
 
-                        // Redirigir a la página de visualización de los usuarios
                         ctx.redirect("/usuario");
 
                     });

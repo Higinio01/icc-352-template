@@ -8,9 +8,7 @@ import java.util.List;
 public class ServicioUsuario {
     private static ServicioUsuario instancia;
     private static List<Usuario> listaUsuarios = new ArrayList<>();
-
     private Usuario usuarioLogeado;
-
 
     private ServicioUsuario(){
         listaUsuarios.add(new Usuario("admin", "admin Administrador", "admin", true, true));
@@ -27,10 +25,6 @@ public class ServicioUsuario {
 
     public List<Usuario> getListaUsuarios() {
         return listaUsuarios;
-    }
-
-    public void setListaUsuarios(List<Usuario> listaUsuarios) {
-        this.listaUsuarios = listaUsuarios;
     }
 
     public Usuario getUsuarioLogeado() {
@@ -70,9 +64,6 @@ public class ServicioUsuario {
     public Usuario getUsuarioPorUsuario(String usuario){
         return listaUsuarios.stream().filter(u -> u.getUsuario().equalsIgnoreCase(usuario)).findFirst().orElse(null);
     }
-    public Usuario getUsuarioPorNombre(String nombre){
-        return listaUsuarios.stream().filter(u -> u.getNombre().equalsIgnoreCase(nombre)).findFirst().orElse(null);
-    }
 
     public static Usuario buscarUsuarioPorUsername(String username) {
         for (Usuario usuario : listaUsuarios) {
@@ -81,11 +72,6 @@ public class ServicioUsuario {
             }
         }
         return null; // No se encontró el usuario
-    }
-
-    public static Usuario usuarioLogeado (String username) {
-        Usuario tmp = buscarUsuarioPorUsername(username);
-        return tmp;
     }
 
     public Usuario actualizarUsuario(Usuario usuario) {

@@ -41,8 +41,6 @@ public class ControladorInicio extends BaseControlador {
 
         app.get("/login", ctx -> {
             Usuario usuario = servicio_usuario.getUsuarioLogeado();
-
-
             if(usuario == null) {
                 Map<String, Object> modelo = new HashMap<>();
                 modelo.put("titulo", "Inicio de Sesion");
@@ -67,6 +65,5 @@ public class ControladorInicio extends BaseControlador {
         });
 
     }
-
 
 }

@@ -17,8 +17,8 @@ import java.util.Map;
 
 public class ControladorArticulo extends BaseControlador {
 
-    private static ServicioArticulo servicio_art = ServicioArticulo.getInstancia();
-    private static ServicioUsuario servicio_usuario = ServicioUsuario.getInstancia();
+    private static ServicioArticulo servicioArticulo = ServicioArticulo.getInstancia();
+    private static ServicioUsuario servicioUsuario = ServicioUsuario.getInstancia();
     private static ServicioComentario servicioComentario = ServicioComentario.getInstancia();
 
     public ControladorArticulo(Javalin app){super (app);}
@@ -27,7 +27,7 @@ public class ControladorArticulo extends BaseControlador {
     public void aplicarRutas() {
 
         app.before("/crearArticulo", ctx -> {
-            Usuario usuario = servicio_usuario.getUsuarioLogeado();
+            Usuario usuario = servicioUsuario.getUsuarioLogeado();
             if(usuario.getUsuario() == null){
                 System.out.println("Necesita iniciar sesion");
                 ctx.redirect("/");
@@ -41,15 +41,12 @@ public class ControladorArticulo extends BaseControlador {
 
             ctx.render("publico/NuevoArticulo.html", modelo);
         });
-        /*app.get("/publicar", ctx ->{
 
-            ctx.redirect("/RegistrarUsuario.html");
-        });*/
         app.before("/editar/{id}", ctx -> {
-            Articulo articulo = servicio_art.getArticuloPorID(ctx.pathParamAsClass("id", long.class).get());
+            Articulo articulo = servicioArticulo.getArticuloPorID(ctx.pathParamAsClass("id", long.class).get());
             String autor = articulo.getAutor().getUsername();
-            String username = servicio_usuario.getUsuarioLogeado().getUsername();
-            if (!servicio_usuario.getUsuarioPorUsuario(username).isAdmin()) {
+            String username = servicioUsuario.getUsuarioLogeado().getUsername();
+            if (!servicioUsuario.getUsuarioPorUsuario(username).isAdmin()) {
                 if (!autor.equals(username)) {
                     System.out.println("Solo un admin o el autor del articulo lo puede editar");
                     ctx.redirect("/");
@@ -58,7 +55,7 @@ public class ControladorArticulo extends BaseControlador {
         });
 
         app.get("/editar/{id}", ctx -> {
-            Articulo articulo = servicio_art.getArticuloPorID(ctx.pathParamAsClass("id", long.class).get());
+            Articulo articulo = servicioArticulo.getArticuloPorID(ctx.pathParamAsClass("id", long.class).get());
 
             Map<String, Object> modelo = new HashMap<>();
             modelo.put("titulo", "Editar "+articulo.getId());
@@ -68,19 +65,14 @@ public class ControladorArticulo extends BaseControlador {
         });
 
         app.post("/editar", ctx -> {
-            //long id = ctx.pathParamAsClass("id", Long.class).get();
             String titulo = ctx.formParam("titulo");
             String cuerpo = ctx.formParam("cuerpo");
             String etiquetas = ctx.formParam("etiquetas");
 
-            // Obtener el artículo existente por su ID
             Articulo articuloExistente = ctx.sessionAttribute("artActual");
 
-
-            // Actualizar las propiedades del artículo
             articuloExistente.setTitulo(titulo);
             articuloExistente.setCuerpo(cuerpo);
-            // Actualizar las etiquetas
 
             String[] etiquetasArray = etiquetas.split(", ");
             List<String> listaEtiquetas = new ArrayList<>();
@@ -90,12 +82,8 @@ public class ControladorArticulo extends BaseControlador {
             }
             articuloExistente.setListaEtiqueta(listaEtiquetas);
 
+            servicioArticulo.actualizarArticulo(articuloExistente);
 
-            // Llamar al método de servicio para editar el artículo
-            servicio_art.actualizarArticulo(articuloExistente);
-
-
-            // Redirigir a la página de visualización del artículo
             ctx.redirect("/verArticulo/" + articuloExistente.getId());
 
         });
@@ -106,7 +94,7 @@ public class ControladorArticulo extends BaseControlador {
             String titulo = ctx.formParam("titulo");
             String cuerpo = ctx.formParam("cuerpo");
             String etiquetas = ctx.formParam("etiquetas");
-            Usuario autor = servicio_usuario.getUsuarioLogeado();
+            Usuario autor = servicioUsuario.getUsuarioLogeado();
             LocalDate fecha =  LocalDate.now();
 
             String[] etiquetasArray = etiquetas.split(", ");
@@ -116,10 +104,10 @@ public class ControladorArticulo extends BaseControlador {
                 listaEtiquetas.add(etiqueta);
             }
 
-            if (servicio_art.getArticuloPorID(nuevoId) == null) {
-                if(servicio_art.autenticarArticulo(nuevoId, titulo,cuerpo)) {
+            if (servicioArticulo.getArticuloPorID(nuevoId) == null) {
+                if(servicioArticulo.autenticarArticulo(nuevoId, titulo,cuerpo)) {
                     Articulo art = new Articulo(nuevoId, titulo, cuerpo, autor, fecha);
-                    servicio_art.crearArticulo(art);
+                    servicioArticulo.crearArticulo(art);
                     art.setListaEtiqueta(listaEtiquetas);
 
                 }else{
@@ -135,7 +123,7 @@ public class ControladorArticulo extends BaseControlador {
         });
 
         app.get("/verArticulo/{id}", ctx ->{
-            Articulo articulo = servicio_art.getArticuloPorID(ctx.pathParamAsClass("id", long.class).get());
+            Articulo articulo = servicioArticulo.getArticuloPorID(ctx.pathParamAsClass("id", long.class).get());
             ctx.sessionAttribute("artActual", articulo);
 
             List<Comentario> listaComen = servicioComentario.getComentariosPorArticulo(articulo);

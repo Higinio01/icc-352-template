@@ -54,9 +54,6 @@ public class ServicioArticulo {
         return articulo;
     }
 
-
-
-    // ACTUALIZAR
     public Articulo actualizarArticulo(Articulo articulo) {
         Articulo tmp = getArticuloPorID(articulo.getId());
         if(tmp == null) {
@@ -68,7 +65,6 @@ public class ServicioArticulo {
         return articulo;
     }
 
-    // LISTAR
     public Articulo getArticuloPorID(long id) {
         return ListaArticulos.stream().filter(p -> p.getId() == id).findFirst().orElse(null);
 
